@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Bộ Sưu Tập</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #b5c460, #2a9856);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            padding: 20px;
+            font-size: 2em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            flex: 1 1 auto;
+            max-width: 400px;
+            box-sizing: border-box;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgb(249, 248, 248);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1><b>Bộ sưu tập tranh ảnh về Bác Hồ</b></h1>
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        const imageUrls = [
+            'https://bvhttdl.mediacdn.vn/2020/10/27/5-15875454604011998230042-16036836450041268704454-1603763865239-1603763866080171610522.jpg',
+            'https://quantri.tpthuduc.hochiminhcity.gov.vn//UploadImages/catlai/2024_7_26/hinh-anh-bac-ho-cuoi-2-04-11-51-27.jpg?w=1130',
+            'https://www.bqllang.gov.vn/images/tintuc/28.6.2012/anh_mau_hiem_ve_Bac.1.2.jpg',
+            'https://thegioidisan.vn/assets/media/2016/Thang%204/2042016/bac-ho2.jpg',
+            'https://cdn.baohatinh.vn/images/93923d58fc3bb0f0af3e4594b0c37b711c5894d7c14850074ad49aa6d12239dd38fa2a6be817c926ac26718e32cbab2e/77d5063829t8553l22.jpg',
+            'https://bvhttdl.mediacdn.vn/2020/5/7/bac-ho-va-dai-tuong-vo-nguyen-giap-trong-chien-dich-dien-bien-phu-2-081715-1588839802743-1588839802744973270156-1588841773864-15888417738641702495253.jpg',
+            'https://hochiminh.vn/Uploads/2019/1/2/9/HCM%2092.jpg',
+            'https://cand.com.vn/Files/Image/thanhbinh/2020/07/16/9124f54e-7ecb-40c2-ba6a-cc12f29aab87.jpg',
+            'https://baovinhlong.com.vn/file/e7837c027f6ecd14017ffa4e5f2a0e34/dataimages/201707/original/images1945944_6.jpg',
+            'https://lh6.googleusercontent.com/proxy/0k-UZu9zPIe3oFz4_rzIqTqn8uNtiJjelrHswIo6pdbOf0KbriQTxCKv60qwQPH3If68HsKccQDBd-nb5aA6wn1BVn4eXk0FLcraFrFQxGf2RsShPE8ESRs8oSbtB8wIDNOO7EZFevwTQcceOYfTLBocNMbblLwAjh2zZRchuQJhzwpsLw',
+            'https://kenh14cdn.com/A3YmnWqkHeph7OwGyu6TwbX57tgTw/Image/2012/09/120901kpBacHo05-b6036.jpg',
+            'https://tramhuongangiabao.com.vn/wp-content/uploads/2023/01/1665114595_anh-bac-ho(13).jpg',
+            'https://d4.violet.vn/uploads/blogs/735185/tutuonghcm.gif',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAZboPA-5VbK-Cg9406-JVbGFCcjFy0OP8gw&s',
+            'https://danviet.mediacdn.vn/296231569849192448/2021/5/18/7-16213561459811740838334.jpg',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIAjKvfXF5Cf03qk-xL6PamragOVeLC7TKpV3wLiE9wgZyqGahoOf1zw2p-OzshNpF85o&usqp=CAU',
+            'https://inkythuatso.com/uploads/thumbnails/800/2023/03/nhung-hinh-anh-ve-bac-ho-dep-nhat-5-04-11-50-21.jpg',
+            "https://inkythuatso.com/uploads/thumbnails/800/2023/03/nhung-hinh-anh-ve-bac-ho-dep-nhat-4-04-11-50-04.jpg",
+            'https://phunugioi.com/wp-content/uploads/2020/05/hinh-anh-bac-ho-dep-nhat-dang-vay-tay-chao.jpg',
+            'https://img.giaoduc.net.vn/w1000/Uploaded/2025/rutmne/2012_05_18/bac-ho-anh-mau-giaoduc.net.vn%20(18).jpg',
+            'https://i.pinimg.com/1200x/64/66/3f/64663fa2d92be94f2c01a3c650c03dc4.jpg',
+            'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-bac-ho-39-1.jpg',
+        ];
+
+        const gallery = document.getElementById('gallery');
+
+        imageUrls.forEach((url, index) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = `Tranh cát về Bác Hồ ${index + 1}`;
+            item.appendChild(img);
+            gallery.appendChild(item);
+        });
+    </script>
+    <!doctype html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>3D Flip Card</title>
+        <link href="https://vsdio.com/media/assets/bootstrap-5.3.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://vsdio.com/media/assets/icons-1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+        <style>
+          .f-card {
+                    width: 300px;
+                    height: 450px;
+                    perspective: 1000px; /* Tạo hiệu ứng 3D */
+                    margin-bottom: 20px;
+                }
+    
+                .f-card-inner {
+                    width: 100%;
+                    height: 100%;
+                    transform-style: preserve-3d;
+                    position: relative;
+                    transition: transform 0.6s ease;
+                }
+    
+                .f-card:hover .f-card-inner {
+                    transform: rotateY(180deg); /* Lật ảnh */
+                }
+    
+                .card-front, .card-back {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    background-size: cover;
+                    background-position: center;
+                }
+    
+                .card-front {
+                    transition: opacity 0.6s ease 0.6s; /* Chờ lật xong rồi mới làm mờ */
+                    backface-visibility: visible; /* Giữ ảnh sau khi lật */
+                }
+    
+                .f-card:hover .card-front {
+                    opacity: 0.3; /* Làm mờ từ từ sau khi lật */
+                }
+    
+                .card-back {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    text-align: center;
+                    color: white;
+                
+                    backdrop-filter: blur(10px); /* Làm mờ nền */
+                    transform: rotateY(180deg);
+                    opacity: 0;
+                    transition: opacity 0.6s ease-in-out 0.6s; /* Xuất hiện sau khi lật */
+                }
+    
+                .f-card:hover .card-back {
+                    opacity: 1; /* Hiện nội dung sau khi lật */
+                }
+                .f-card {
+                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Đổ bóng xung quanh thẻ */
+                    border-radius: 12px; /* Bo tròn viền */
+                    overflow: hidden; /* Đảm bảo viền bo tròn áp dụng lên ảnh */
+                    border: 3px solid #fff; /* Viền trắng quanh thẻ */
+                }
+    
+                .card-front, .card-back {
+                    border-radius: 12px; /* Bo tròn cả 2 mặt */
+                }
+    
+                .f-card:hover {
+                    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); /* Đổ bóng mạnh hơn khi hover */
+                }
+                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    
+                body {
+                    font-family: 'Poppins', sans-serif;
+                }
+    
+                .card-back h4 {
+                    font-size: 22px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+                    -webkit-text-stroke: 3px black; /* Viền đen 1px */
+                }
+    
+                .card-back p {
+                    font-size: 20px;
+                    font-weight: 400;
+                    max-width: 80%;
+                    margin: 0 auto;
+                    line-height: 1.5;
+                    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+                    -webkit-text-stroke: 1.45px rgb(108, 98, 98); /* Viền đen 1px */
+                }
+    
+        </style>
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">CHỦ TỊCH HỒ CHÍ MINH</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(0)">Thời Niên Thiếu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(1)">Tìm Đường Cứu Nước</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(3)">Giai Đoạn Cách Mạng</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(4)">Giai Đoạn Giành Độc Lập</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="redirectToGallery()">____Bộ Sưu Tập____</a>
+                        </li>
+                        
+                        <script>
+                            function redirectToGallery() {
+                                window.location.href ="hcm-picture.html";
+                            }
+                        </script>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+        <section class="py-5">
+            <div class="container">
+                <div class="row g-4" id="card-container">
+                </div>
+            </div>
+        </section>
+        
+        <script>
+            const imageSets = [
+        [
+            { img: "image1c.jpg", title: "Cha của Nguyễn Tất Thành", text: " cụ Nguyễn Sinh Sắc (1862-1929)" },
+            { img: "image1b.jpg", title: "Nguyễn Tất Thành thời niên thiếu", text: "Hình ảnh Nguyễn Tất Thành (tên khai sinh của Chủ tịch Hồ Chí Minh) trong những năm tháng học tập tại trường Quốc Học Huế." },
+            { img: "image1d.jpg", title: "Mẹ của Nguyễn Tất Thành", text: "cụ Hoàng Thị Loan (1868-1901)" },
+            { img: "image1a.jpg", title: "Ngôi Nhà Bác Hồ", text: "Giản dị ngôi nhà của Bác ở làng Sen năm 2025" },
+            { img: "image1e.jpg", title: "Trường Bác theo học", text: "Trường Quốc Học Huế" },
+            { img: "image1f.jpg", title: "Bác Hồ", text: "trên con đường cứu dân cứu nước" }
+        ],
+        [
+            { img: "image2a.jpg", title: "Nguyễn Tất Thành", text: "chuyến ra đi tìm đường cứu nước" },
+            { img: "image2b.jpg", title: "Nguyễn Ái Quốc", text: "Giữa năm 1923, Người sang Liên Xô." },
+            { img: "image2c.jpg", title: "Sau Đại hội Quốc tế Cộng sản lần thứ 5", text: " " },
+            { img: "image2d.jpg", title: "Hộ chiếu", text: "Hành trang đi khắp năm châu cùng Bác" },
+            { img: "image2e.jpg", title: "Nguyễn Ái Quốc", text: "Tham gia hội nghị trên con đường cứu nước" },
+            { img: "image2f.jpg", title: "Nguyễn Ái Quốc", text: "Làm phụ bếp trên tàu Amiral Latouche " }
+        ],
+        [
+            { img: "image3a.jpg", title: "Ảnh 2A", text: "Thông tin về ảnh 2A" },
+            { img: "image3b.jpg", title: "Ảnh 2B", text: "Thông tin về ảnh 2B" },
+            { img: "image3c.jpg", title: "Ảnh 2C", text: "Thông tin về ảnh 2C" },
+            { img: "image3d.jpg", title: "Ảnh 2D", text: "Thông tin về ảnh 2D" },
+            { img: "image3e.jpg", title: "Ảnh 2E", text: "Thông tin về ảnh 2E" },
+            { img: "image3f.jpg", title: "Ảnh 2F", text: "Thông tin về ảnh 2F" }
+        ],
+        [
+            { img: "image4a.jpg", title: " Đảng Xã hội Pháp ở thành phố Tua (nước Pháp), tháng 12/1920", text: " đồng chí Nguyễn Ái Quốc trở thành một trong những người sáng lập Đảng Cộng sản Pháp." },
+            { img: "image4b.jpg", title: "Hồ Chủ tịch năm 1945.", text: " " },
+            { img: "image4c.jpg", title: "Tháng 2/1946", text: "Người nói chuyện với hơn 10 vạn nhân dân thủ đô hà Nội sau cuộc tổng tuyển cử bầu ra Quốc hội đầu tiên của nước Việt Nam dân chủ cộng hoà" },
+            { img: "image4d.jpg", title: "Ngày 31/5/1945, Người dẫn đầu Đoàn đại biểu Chính phủ ta sang đàm phán chính thức với chính phủ Pháp.", text: " " },
+            { img: "image4e.jpg", title: "Cuối năm 1953, tại Việt Bắc", text: "Hồ Chủ tịch và các đồng chí lãnh đạo Đảng quyết định mở chiến dịch Điện Biên Phủ." },
+            { img: "image4f.jpg", title: "Hồ Chủ Tịch", text: "chủ trì một phiên họp Hội đồng Chính phủ sau chiến thắng Điện Biên Phủ." }
+        ],
+        [
+            { img: "image5a.jpg", title: "Hồ Chủ tịch trong phòng làm việc của Người ở Phủ chủ tịch năm 1946.A", text: " " },
+            { img: "image5b.jpg", title: "Hồ Chủ Tích", text: "Người làm việc trong hang đá ở Việt Bắc năm 1951." },
+            { img: "image5c.jpg", title: "Bác Hồ ", text: "dạy: “Thực túc thì binh cường” và ngày ngày Người tăng gia sản xuất cùng đồng bào, chiến sĩ." },
+            { img: "image5d.jpg", title: "Năm 1949, Đoàn đại biểu Nam Bộ từ miền Nam", text: "ra thăm miền Bắc đã tới quây quần bên Hồ Chủ tịch." },
+            { img: "image5e.jpg", title: "Bác và chiếc máy đánh chữ", text: "Từ chiếc máy đánh chữ của Người đã ra đời nhiều văn kiện liên quan đến vận mệnh đất nước." },
+            { img: "image5f.jpg", title: "Chủ tịch Hồ Chí Minh", text: "thăm nhà máy diêm Thống Nhất những năm đầu khôi phục kinh tế (1956)." }
+        ]
+    
+    ];
+    
+    function changeImages(index) {
+        const container = document.getElementById('card-container');
+        container.innerHTML = '';
+    
+        imageSets[index].forEach((item, i) => {
+            if (i === 3) {
+                container.innerHTML += '<div class="w-100"></div>'; 
+            }
+            container.innerHTML += `
+                <div class="col-md-4">
+                    <div class="f-card">
+                        <div class="f-card-inner">
+                            <div class="card-front" style="background-image: url('${item.img}');"></div>
+                            <div class="card-back">
+                                <h4>${item.title}</h4> 
+                                <p>${item.text}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
+    // Gọi hàm để hiển thị danh sách đầu tiên
+    changeImages(0);
+    
+        </script>
+        
+        
+        <script src="https://vsdio.com/media/assets/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
+        <script>
+            let scrollDirection = 1; // 1: cuộn xuống, -1: cuộn lên
+            let speed = 2; // Tốc độ cuộn (số pixel mỗi lần cuộn)
+            let intervalTime = 50; // Thời gian giữa mỗi lần cuộn (ms)
+        
+            function autoScroll() {
+                let scrollY = window.scrollY;
+                let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        
+                if (scrollY >= maxScroll) {
+                    scrollDirection = -1; // Đổi hướng cuộn lên
+                } else if (scrollY <= 0) {
+                    scrollDirection = 1; // Đổi hướng cuộn xuống
+                }
+        
+                window.scrollBy(0, speed * scrollDirection);
+            }
+        
+            setInterval(autoScroll, intervalTime);
+        </script>
+        
+    </body>
+    </html>
+    
+</body>
+</html>
