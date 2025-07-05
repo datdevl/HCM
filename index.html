@@ -1,223 +1,128 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Hồ Chí Minh</title>
+    <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="favicon.png">
-    <link href="https://vsdio.com/media/assets/bootstrap-5.3.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://vsdio.com/media/assets/icons-1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <title>Chào Mừng Bạn</title>
     <style>
-      .f-card {
-                width: 300px;
-                height: 450px;
-                perspective: 1000px; /* Tạo hiệu ứng 3D */
-                margin-bottom: 20px;
-            }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            color: #333;
+        }
 
-            .f-card-inner {
-                width: 100%;
-                height: 100%;
-                transform-style: preserve-3d;
-                position: relative;
-                transition: transform 0.6s ease;
-            }
+        header {
+            background: #2e3d49;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-            .f-card:hover .f-card-inner {
-                transform: rotateY(180deg); /* Lật ảnh */
-            }
+        nav {
+            background: #1a242f;
+            padding: 10px;
+            text-align: center;
+        }
 
-            .card-front, .card-back {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                background-size: cover;
-                background-position: center;
-            }
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
 
-            .card-front {
-                transition: opacity 0.6s ease 0.6s; /* Chờ lật xong rồi mới làm mờ */
-                backface-visibility: visible; /* Giữ ảnh sau khi lật */
-            }
+        nav a:hover {
+            text-decoration: underline;
+        }
 
-            .f-card:hover .card-front {
-                opacity: 0.3; /* Làm mờ từ từ sau khi lật */
-            }
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-            .card-back {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                text-align: center;
-                color: white;
-            
-                backdrop-filter: blur(10px); /* Làm mờ nền */
-                transform: rotateY(180deg);
-                opacity: 0;
-                transition: opacity 0.6s ease-in-out 0.6s; /* Xuất hiện sau khi lật */
-            }
+        .content h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
 
-            .f-card:hover .card-back {
-                opacity: 1; /* Hiện nội dung sau khi lật */
-            }
-            .f-card {
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Đổ bóng xung quanh thẻ */
-                border-radius: 12px; /* Bo tròn viền */
-                overflow: hidden; /* Đảm bảo viền bo tròn áp dụng lên ảnh */
-                border: 3px solid #fff; /* Viền trắng quanh thẻ */
-            }
+        .image-card {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
 
-            .card-front, .card-back {
-                border-radius: 12px; /* Bo tròn cả 2 mặt */
-            }
+        .image-card div {
+            width: 200px;
+            height: 200px;
+            background-color: #2e3d49;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
 
-            .f-card:hover {
-                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); /* Đổ bóng mạnh hơn khi hover */
-            }
-            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
 
-            body {
-                font-family: 'Poppins', sans-serif;
-            }
+        .image-card div:hover img {
+            transform: scale(1.1);
+        }
 
-            .card-back h4 {
-                font-size: 22px;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-                -webkit-text-stroke: 3px black; /* Viền đen 1px */
-                margin-bottom: 35px; /* Tạo khoảng cách giữa title và nội dung */
-            }
-
-
-            .card-back p {
-                font-size: 20px;
-                font-weight: 400;
-                max-width: 80%;
-                margin: 0 auto;
-                line-height: 1.5;
-                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-                -webkit-text-stroke: 1.45px rgb(108, 98, 98); /* Viền đen 1px */
-            }
-
+        footer {
+            background: #2e3d49;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">CHỦ TỊCH HỒ CHÍ MINH</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(0)">Thời Niên Thiếu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(1)">Tìm Đường Cứu Nước</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(3)">Giai Đoạn Cách Mạng</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(4)">Giai Đoạn Giành Độc Lập</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="redirectToGallery()"><b>BỘ SƯU TẬP</b></a>
-                    </li>
-                    
-                    <script>
-                        function redirectToGallery() {
-                            window.location.href ="hcm-picture.html";
-                        }
-                    </script>
-                    
-                </ul>
-            </div>
-        </div>
+    <header>
+        Chào Mừng Bạn Đến Với Website Bác Hồ
+    </header>
+
+    <nav>
+        <a href="#tnh">Thời Niên Thiếu</a>
+        <a href="#tdcn">Tìm Đường Cứu Nước</a>
+        <a href="#gdcmt">Giai Đoạn Cách Mạng</a>
+        <a href="#gdgl">Giai Đoạn Giành Độc Lập</a>
+        <a href="hcm-picture.html">Bộ Sưu Tập</a>
     </nav>
 
-    <section class="py-5">
-        <div class="container">
-            <div class="row g-4" id="card-container">
+    <div class="content">
+        <h2>Chào Mừng Bạn Đến Với Website Bác Hồ</h2>
+        <div class="image-card">
+            <div>
+                <img src="https://img.giaoduc.net.vn/w1000/Uploaded/2025/rutmne/2012_05_18/bac-ho-anh-mau-giaoduc.net.vn%20(18).jpg" alt="Bác Hồ">
+            </div>
+            <div>
+                <img src="https://cdn.baohatinh.vn/images/93923d58fc3bb0f0af3e4594b0c37b711c5894d7c14850074ad49aa6d12239dd38fa2a6be817c926ac26718e32cbab2e/77d5063829t8553l22.jpg" alt="Bác Hồ">
+            </div>
+            <div>
+                <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-bac-ho-39-1.jpg" alt="Bác Hồ">
             </div>
         </div>
-    </section>
-    
-    <script>
-        const imageSets = [
-    [
-        { img: "image1c.jpg", title: "Cha của Nguyễn Tất Thành", text: " cụ Nguyễn Sinh Sắc (1862-1929)" },
-        { img: "image1b.jpg", title: "Nguyễn Tất Thành thời niên thiếu", text: "Hình ảnh Nguyễn Tất Thành (tên khai sinh của Chủ tịch Hồ Chí Minh) trong những năm tháng học tập tại trường Quốc Học Huế." },
-        { img: "image1d.jpg", title: "Mẹ của Nguyễn Tất Thành", text: "cụ Hoàng Thị Loan (1868-1901)" },
-        { img: "image1a.jpg", title: "Ngôi Nhà Bác Hồ", text: "Giản dị ngôi nhà của Bác ở làng Sen năm 2025" },
-        { img: "image1e.jpg", title: "Trường Bác theo học", text: "Trường Quốc Học Huế" },
-        { img: "image1f.jpg", title: "Bác Hồ", text: "trên con đường cứu dân cứu nước" }
-    ],
-    [
-        { img: "image2a.jpg", title: "Nguyễn Tất Thành", text: "chuyến ra đi tìm đường cứu nước" },
-        { img: "image2b.jpg", title: "Nguyễn Ái Quốc", text: "Giữa năm 1923, Người sang Liên Xô." },
-        { img: "image2c.jpg", title: "Sau Đại hội Quốc tế Cộng sản lần thứ 5", text: " " },
-        { img: "image2d.jpg", title: "Hộ chiếu", text: "Hành trang đi khắp năm châu cùng Bác" },
-        { img: "image2e.jpg", title: "Nguyễn Ái Quốc", text: "Tham gia hội nghị trên con đường cứu nước" },
-        { img: "image2f.jpg", title: "Nguyễn Ái Quốc", text: "Làm phụ bếp trên tàu Amiral Latouche " }
-    ],
-    [
-        { img: "image3a.jpg", title: "Ảnh 2A", text: "Thông tin về ảnh 2A" },
-        { img: "image3b.jpg", title: "Ảnh 2B", text: "Thông tin về ảnh 2B" },
-        { img: "image3c.jpg", title: "Ảnh 2C", text: "Thông tin về ảnh 2C" },
-        { img: "image3d.jpg", title: "Ảnh 2D", text: "Thông tin về ảnh 2D" },
-        { img: "image3e.jpg", title: "Ảnh 2E", text: "Thông tin về ảnh 2E" },
-        { img: "image3f.jpg", title: "Ảnh 2F", text: "Thông tin về ảnh 2F" }
-    ],
-    [
-        { img: "image4a.jpg", title: " Đảng Xã hội Pháp ở thành phố Tua (nước Pháp), tháng 12/1920", text: " đồng chí Nguyễn Ái Quốc trở thành một trong những người sáng lập Đảng Cộng sản Pháp." },
-        { img: "image4b.jpg", title: "Hồ Chủ tịch năm 1945.", text: " " },
-        { img: "image4c.jpg", title: "Tháng 2/1946", text: "Người nói chuyện với hơn 10 vạn nhân dân thủ đô hà Nội sau cuộc tổng tuyển cử bầu ra Quốc hội đầu tiên của nước Việt Nam dân chủ cộng hoà" },
-        { img: "image4d.jpg", title: "Ngày 31/5/1945, Người dẫn đầu Đoàn đại biểu Chính phủ ta sang đàm phán chính thức với chính phủ Pháp.", text: " " },
-        { img: "image4e.jpg", title: "Cuối năm 1953, tại Việt Bắc", text: "Hồ Chủ tịch và các đồng chí lãnh đạo Đảng quyết định mở chiến dịch Điện Biên Phủ." },
-        { img: "image4f.jpg", title: "Hồ Chủ Tịch", text: "chủ trì một phiên họp Hội đồng Chính phủ sau chiến thắng Điện Biên Phủ." }
-    ],
-    [
-        { img: "image5a.jpg", title: "Hồ Chủ tịch trong phòng làm việc của Người ở Phủ chủ tịch năm 1946.A", text: " " },
-        { img: "image5b.jpg", title: "Hồ Chủ Tích", text: "Người làm việc trong hang đá ở Việt Bắc năm 1951." },
-        { img: "image5c.jpg", title: "Bác Hồ ", text: "dạy: “Thực túc thì binh cường” và ngày ngày Người tăng gia sản xuất cùng đồng bào, chiến sĩ." },
-        { img: "image5d.jpg", title: "Năm 1949, Đoàn đại biểu Nam Bộ từ miền Nam", text: "ra thăm miền Bắc đã tới quây quần bên Hồ Chủ tịch." },
-        { img: "image5e.jpg", title: "Bác và chiếc máy đánh chữ", text: "Từ chiếc máy đánh chữ của Người đã ra đời nhiều văn kiện liên quan đến vận mệnh đất nước." },
-        { img: "image5f.jpg", title: "Chủ tịch Hồ Chí Minh", text: "thăm nhà máy diêm Thống Nhất những năm đầu khôi phục kinh tế (1956)." }
-    ]
-
-];
-
-function changeImages(index) {
-    const container = document.getElementById('card-container');
-    container.innerHTML = '';
-
-    imageSets[index].forEach((item, i) => {
-        if (i === 3) {
-            container.innerHTML += '<div class="w-100"></div>'; 
-        }
-        container.innerHTML += `
-            <div class="col-md-4">
-                <div class="f-card">
-                    <div class="f-card-inner">
-                        <div class="card-front" style="background-image: url('${item.img}');"></div>
-                        <div class="card-back">
-                            <h4>${item.title}</h4> 
-                            <p>${item.text}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-}
-
-// Gọi hàm để hiển thị danh sách đầu tiên
-changeImages(0);
-
-    </script>
-    
-    
-    <script src="https://vsdio.com/media/assets/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
-    
+        <footer>
+            &copy; 2025 Website Bác Hồ
+        </footer>
+    </div>
 </body>
 </html>
