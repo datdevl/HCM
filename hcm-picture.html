@@ -6,53 +6,77 @@
     <title>Bộ Sưu Tập</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #b5c460, #2a9856);
+            background: linear-gradient(to right, #3b8d99, #6bce93);
             color: white;
             text-align: center;
         }
 
         h1 {
             padding: 20px;
-            font-size: 2em;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            max-width: 80%;
+            margin: 0 auto;
         }
 
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
             padding: 20px;
             justify-content: center;
         }
 
         .gallery-item {
-            flex: 1 1 auto;
+            flex: 1 1 calc(33.333% - 20px);
             max-width: 400px;
             box-sizing: border-box;
             overflow: hidden;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
         .gallery-item img {
             width: 100%;
             height: auto;
-            display: block;
             border-radius: 10px;
             transition: transform 0.3s ease;
         }
 
         .gallery-item:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 15px rgb(249, 248, 248);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
         }
 
         .gallery-item:hover img {
             transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: "Xem Thêm";
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
@@ -98,245 +122,5 @@
             gallery.appendChild(item);
         });
     </script>
-    <!doctype html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>3D Flip Card</title>
-        <link href="https://vsdio.com/media/assets/bootstrap-5.3.3/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://vsdio.com/media/assets/icons-1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-        <style>
-          .f-card {
-                    width: 300px;
-                    height: 450px;
-                    perspective: 1000px; /* Tạo hiệu ứng 3D */
-                    margin-bottom: 20px;
-                }
-    
-                .f-card-inner {
-                    width: 100%;
-                    height: 100%;
-                    transform-style: preserve-3d;
-                    position: relative;
-                    transition: transform 0.6s ease;
-                }
-    
-                .f-card:hover .f-card-inner {
-                    transform: rotateY(180deg); /* Lật ảnh */
-                }
-    
-                .card-front, .card-back {
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    background-size: cover;
-                    background-position: center;
-                }
-    
-                .card-front {
-                    transition: opacity 0.6s ease 0.6s; /* Chờ lật xong rồi mới làm mờ */
-                    backface-visibility: visible; /* Giữ ảnh sau khi lật */
-                }
-    
-                .f-card:hover .card-front {
-                    opacity: 0.3; /* Làm mờ từ từ sau khi lật */
-                }
-    
-                .card-back {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: column;
-                    text-align: center;
-                    color: white;
-                
-                    backdrop-filter: blur(10px); /* Làm mờ nền */
-                    transform: rotateY(180deg);
-                    opacity: 0;
-                    transition: opacity 0.6s ease-in-out 0.6s; /* Xuất hiện sau khi lật */
-                }
-    
-                .f-card:hover .card-back {
-                    opacity: 1; /* Hiện nội dung sau khi lật */
-                }
-                .f-card {
-                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Đổ bóng xung quanh thẻ */
-                    border-radius: 12px; /* Bo tròn viền */
-                    overflow: hidden; /* Đảm bảo viền bo tròn áp dụng lên ảnh */
-                    border: 3px solid #fff; /* Viền trắng quanh thẻ */
-                }
-    
-                .card-front, .card-back {
-                    border-radius: 12px; /* Bo tròn cả 2 mặt */
-                }
-    
-                .f-card:hover {
-                    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); /* Đổ bóng mạnh hơn khi hover */
-                }
-                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-    
-                body {
-                    font-family: 'Poppins', sans-serif;
-                }
-    
-                .card-back h4 {
-                    font-size: 22px;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-                    -webkit-text-stroke: 3px black; /* Viền đen 1px */
-                }
-    
-                .card-back p {
-                    font-size: 20px;
-                    font-weight: 400;
-                    max-width: 80%;
-                    margin: 0 auto;
-                    line-height: 1.5;
-                    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-                    -webkit-text-stroke: 1.45px rgb(108, 98, 98); /* Viền đen 1px */
-                }
-    
-        </style>
-    </head>
-    
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">CHỦ TỊCH HỒ CHÍ MINH</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(0)">Thời Niên Thiếu</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(1)">Tìm Đường Cứu Nước</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(3)">Giai Đoạn Cách Mạng</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#" onclick="changeImages(4)">Giai Đoạn Giành Độc Lập</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="redirectToGallery()">____Bộ Sưu Tập____</a>
-                        </li>
-                        
-                        <script>
-                            function redirectToGallery() {
-                                window.location.href ="hcm-picture.html";
-                            }
-                        </script>
-                        
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    
-        <section class="py-5">
-            <div class="container">
-                <div class="row g-4" id="card-container">
-                </div>
-            </div>
-        </section>
-        
-        <script>
-            const imageSets = [
-        [
-            { img: "image1c.jpg", title: "Cha của Nguyễn Tất Thành", text: " cụ Nguyễn Sinh Sắc (1862-1929)" },
-            { img: "image1b.jpg", title: "Nguyễn Tất Thành thời niên thiếu", text: "Hình ảnh Nguyễn Tất Thành (tên khai sinh của Chủ tịch Hồ Chí Minh) trong những năm tháng học tập tại trường Quốc Học Huế." },
-            { img: "image1d.jpg", title: "Mẹ của Nguyễn Tất Thành", text: "cụ Hoàng Thị Loan (1868-1901)" },
-            { img: "image1a.jpg", title: "Ngôi Nhà Bác Hồ", text: "Giản dị ngôi nhà của Bác ở làng Sen năm 2025" },
-            { img: "image1e.jpg", title: "Trường Bác theo học", text: "Trường Quốc Học Huế" },
-            { img: "image1f.jpg", title: "Bác Hồ", text: "trên con đường cứu dân cứu nước" }
-        ],
-        [
-            { img: "image2a.jpg", title: "Nguyễn Tất Thành", text: "chuyến ra đi tìm đường cứu nước" },
-            { img: "image2b.jpg", title: "Nguyễn Ái Quốc", text: "Giữa năm 1923, Người sang Liên Xô." },
-            { img: "image2c.jpg", title: "Sau Đại hội Quốc tế Cộng sản lần thứ 5", text: " " },
-            { img: "image2d.jpg", title: "Hộ chiếu", text: "Hành trang đi khắp năm châu cùng Bác" },
-            { img: "image2e.jpg", title: "Nguyễn Ái Quốc", text: "Tham gia hội nghị trên con đường cứu nước" },
-            { img: "image2f.jpg", title: "Nguyễn Ái Quốc", text: "Làm phụ bếp trên tàu Amiral Latouche " }
-        ],
-        [
-            { img: "image3a.jpg", title: "Ảnh 2A", text: "Thông tin về ảnh 2A" },
-            { img: "image3b.jpg", title: "Ảnh 2B", text: "Thông tin về ảnh 2B" },
-            { img: "image3c.jpg", title: "Ảnh 2C", text: "Thông tin về ảnh 2C" },
-            { img: "image3d.jpg", title: "Ảnh 2D", text: "Thông tin về ảnh 2D" },
-            { img: "image3e.jpg", title: "Ảnh 2E", text: "Thông tin về ảnh 2E" },
-            { img: "image3f.jpg", title: "Ảnh 2F", text: "Thông tin về ảnh 2F" }
-        ],
-        [
-            { img: "image4a.jpg", title: " Đảng Xã hội Pháp ở thành phố Tua (nước Pháp), tháng 12/1920", text: " đồng chí Nguyễn Ái Quốc trở thành một trong những người sáng lập Đảng Cộng sản Pháp." },
-            { img: "image4b.jpg", title: "Hồ Chủ tịch năm 1945.", text: " " },
-            { img: "image4c.jpg", title: "Tháng 2/1946", text: "Người nói chuyện với hơn 10 vạn nhân dân thủ đô hà Nội sau cuộc tổng tuyển cử bầu ra Quốc hội đầu tiên của nước Việt Nam dân chủ cộng hoà" },
-            { img: "image4d.jpg", title: "Ngày 31/5/1945, Người dẫn đầu Đoàn đại biểu Chính phủ ta sang đàm phán chính thức với chính phủ Pháp.", text: " " },
-            { img: "image4e.jpg", title: "Cuối năm 1953, tại Việt Bắc", text: "Hồ Chủ tịch và các đồng chí lãnh đạo Đảng quyết định mở chiến dịch Điện Biên Phủ." },
-            { img: "image4f.jpg", title: "Hồ Chủ Tịch", text: "chủ trì một phiên họp Hội đồng Chính phủ sau chiến thắng Điện Biên Phủ." }
-        ],
-        [
-            { img: "image5a.jpg", title: "Hồ Chủ tịch trong phòng làm việc của Người ở Phủ chủ tịch năm 1946.A", text: " " },
-            { img: "image5b.jpg", title: "Hồ Chủ Tích", text: "Người làm việc trong hang đá ở Việt Bắc năm 1951." },
-            { img: "image5c.jpg", title: "Bác Hồ ", text: "dạy: “Thực túc thì binh cường” và ngày ngày Người tăng gia sản xuất cùng đồng bào, chiến sĩ." },
-            { img: "image5d.jpg", title: "Năm 1949, Đoàn đại biểu Nam Bộ từ miền Nam", text: "ra thăm miền Bắc đã tới quây quần bên Hồ Chủ tịch." },
-            { img: "image5e.jpg", title: "Bác và chiếc máy đánh chữ", text: "Từ chiếc máy đánh chữ của Người đã ra đời nhiều văn kiện liên quan đến vận mệnh đất nước." },
-            { img: "image5f.jpg", title: "Chủ tịch Hồ Chí Minh", text: "thăm nhà máy diêm Thống Nhất những năm đầu khôi phục kinh tế (1956)." }
-        ]
-    
-    ];
-    
-    function changeImages(index) {
-        const container = document.getElementById('card-container');
-        container.innerHTML = '';
-    
-        imageSets[index].forEach((item, i) => {
-            if (i === 3) {
-                container.innerHTML += '<div class="w-100"></div>'; 
-            }
-            container.innerHTML += `
-                <div class="col-md-4">
-                    <div class="f-card">
-                        <div class="f-card-inner">
-                            <div class="card-front" style="background-image: url('${item.img}');"></div>
-                            <div class="card-back">
-                                <h4>${item.title}</h4> 
-                                <p>${item.text}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-    }
-    
-    // Gọi hàm để hiển thị danh sách đầu tiên
-    changeImages(0);
-    
-        </script>
-        
-        
-        <script src="https://vsdio.com/media/assets/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
-        <script>
-            let scrollDirection = 1; // 1: cuộn xuống, -1: cuộn lên
-            let speed = 2; // Tốc độ cuộn (số pixel mỗi lần cuộn)
-            let intervalTime = 50; // Thời gian giữa mỗi lần cuộn (ms)
-        
-            function autoScroll() {
-                let scrollY = window.scrollY;
-                let maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        
-                if (scrollY >= maxScroll) {
-                    scrollDirection = -1; // Đổi hướng cuộn lên
-                } else if (scrollY <= 0) {
-                    scrollDirection = 1; // Đổi hướng cuộn xuống
-                }
-        
-                window.scrollBy(0, speed * scrollDirection);
-            }
-        
-            setInterval(autoScroll, intervalTime);
-        </script>
-        
-    </body>
-    </html>
-    
 </body>
 </html>
